@@ -1,24 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { FavoritesProvider } from "./context";
+import Home from "./pages/Home";
+import CocktailPage from "./pages/CocktailPage";
+import Navbar from "./components/Navbar";
+import FavoritesPage from "./pages/FavoritesPage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <FavoritesProvider>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/fav" element={<FavoritesPage />} />
+          <Route path="cocktail/:id" element={<CocktailPage />} />
+        </Routes>
+      </Router>
+    </FavoritesProvider>
   );
 }
 
